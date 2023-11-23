@@ -50,19 +50,28 @@ namespace Calculator
     {
         public double Calculat(string str)
         {
-            double res;
-            int intCount = 0;
-            for (int index = 0; index < str.Length; index++)
-            {
-                if (char.IsDigit(str[index]))
-                {
-                    intCount++;
-                }
-            }
+            int digit = 0;
             if (String.IsNullOrWhiteSpace(str))
             {
                 return 0;
             }
+            else
+            {
+                for (int i = 0; i < str.Length; i++)
+                {
+                    if (char.IsDigit(str[i]))
+                    {
+                        digit++;
+                    }
+                }
+                if (str.Length == digit) {
+                }
+            }
+
+
+            double res;
+            int intCount = 0;
+
             if (str.Length == intCount)  
             {  
                 return Int32.Parse(str); 
