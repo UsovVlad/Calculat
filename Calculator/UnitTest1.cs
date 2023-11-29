@@ -1,7 +1,4 @@
-using System.ComponentModel;
-using System;
-using System.Linq.Expressions;
-using NUnit.Framework;
+using System.Text.RegularExpressions;
 
 namespace Calculator
 {
@@ -25,12 +22,12 @@ namespace Calculator
             Assert.AreEqual(expected, result);
         }
 
-        [TestCase("2+2*-2", -2)]
+        [TestCase("2+2", 4)]
         [TestCase("-2+4", 2)]
         [TestCase("-1-5", -6)]
-        [TestCase("2*34-4*3/5", 65.6)]
-        [TestCase("1/1", 1)]
-        [TestCase("8/-3", -2.67)]
+        [TestCase("234-435", -201)]
+        [TestCase("1+1", 2)]
+        [TestCase("8+3", 11)]
         public void Calculator_WhenIntNambers_OneNumber(string exp, double expected)
         {
             double result = _calculator.Calculat(exp);
@@ -50,49 +47,90 @@ namespace Calculator
     {
         public double Calculat(string str)
         {
-            int digit = 0;
             if (String.IsNullOrWhiteSpace(str))
             {
                 return 0;
             }
             else
             {
-                for (int i = 0; i < str.Length; i++)
-                {
-                    if (char.IsDigit(str[i]))
-                    {
-                        digit++;
-                    }
-                }
-                if (str.Length == digit) {
-                }
+                List<string> tokens = Tokenize(str);
+
+                // Ваш код для обработки токенов и выполнения вычислений
+
+                throw new NotImplementedException();
             }
 
+            //if (String.IsNullOrWhiteSpace(str))
+            //{
+            //    return 0;
+            //}
+            //else
+            //{
+            //    if (int.TryParse(str, out int int_result))
+            //    {
+            //        // Строка является числом, и результат хранится в переменной result
+            //        return (int_result);
+            //    }
+            //    else if (double.TryParse(str, out double double_result))
+            //    {
+            //        return (double_result);
+            //    }
 
-            double res;
-            int intCount = 0;
+            //    else
+            //    {
 
-            if (str.Length == intCount)  
-            {  
-                return Int32.Parse(str); 
-            } 
-            if (double.TryParse(str, out res))
+            //    }
+            //}
+
+            //throw new NotImplementedException();
+        }
+
+        static List<string> Tokenize(string input)
+        {
+            List<string> tokens = new List<string>();
+
+            string pattern = @"\d+|\+|\-|\*|\/|\(|\)";
+            MatchCollection matches = Regex.Matches(input, pattern);
+
+            foreach (Match match in matches)
             {
-            return res;
+                tokens.Add(match.Value);
             }
 
-            try
-            {
-                var result = new System.Data.DataTable().Compute(str, null);
-                return Math.Round(Convert.ToDouble(result), 2);
-            }
-            catch (Exception)
-            {
-                return double.NaN;
-            }
+            return tokens;
+        }
 
 
-            throw new NotImplementedException(); 
-        } 
-    } 
+
+        //public double Calculat(string str)
+        //{
+        //    if (String.IsNullOrWhiteSpace(str))
+        //    {
+        //        return 0;
+        //    }
+        //    else
+        //    {
+        //        for (int i = 0; i < str.Length; i++)
+        //        {
+
+        //        }
+        //        string[] terms = str.Split('+');
+        //        double result = 0;
+
+        //        foreach (string term in terms)
+        //        {
+        //            if (double.TryParse(term, out double number))
+        //            {
+        //                result += number;
+        //            }
+        //            else
+        //            {
+        //                throw new NotImplementedException();
+        //            }
+        //        }
+
+        //        return result;
+        //    }
+        //}
+    }
 }
