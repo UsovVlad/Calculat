@@ -75,8 +75,7 @@ namespace Calculator
         {
             List<string> tokens = new List<string>();
 
-            // Регулярное выражение для токенизации, учитывающее десятичные числа
-            string pattern = @"\d+(\.\d+)?|\+|\-|\*|\/|\(|\)";
+            string pattern = @"\d+(\,\d+)?|\+|\-|\*|\/|\(|\)";
             MatchCollection matches = Regex.Matches(input, pattern);
 
             foreach (Match match in matches)
